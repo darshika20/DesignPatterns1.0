@@ -4,13 +4,13 @@ public class Youtube {
 
     public static void main(String[] args) {
 
-        Subscriber subscriber1 = new Subscriber("Darshika");
-        Subscriber subscriber2 = new Subscriber("Sneha");
-        Subscriber subscriber3 = new Subscriber("Usha");
-        Subscriber subscriber4 = new Subscriber("Deepika");
-        Subscriber subscriber5 = new Subscriber("Pradeep");
+        Observer subscriber1 = ObserverFactory.createObserverInstance("Darshika");
+        Observer subscriber2 = ObserverFactory.createObserverInstance("Usha");
+        Observer subscriber3 = ObserverFactory.createObserverInstance("Sneha");
+        Observer subscriber4 = ObserverFactory.createObserverInstance("Deepika");
+        Observer subscriber5 = ObserverFactory.createObserverInstance("Pradeep");
 
-        Channel channel = new Channel("Family");
+        Subject channel = SubjectFactory.createSubjectInstance("Family");
 
         subscriber1.subscribeToChannel(channel);
         subscriber2.subscribeToChannel(channel);
@@ -18,7 +18,7 @@ public class Youtube {
         subscriber4.subscribeToChannel(channel);
         subscriber5.subscribeToChannel(channel);
 
-        Video video = new Video("Welcome Video!");
+        Event video = EventFactory.createEventInstance("Welcome Video!");
 
         channel.uploadVideo(video);
 

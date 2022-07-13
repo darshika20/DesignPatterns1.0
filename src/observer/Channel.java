@@ -6,8 +6,8 @@ import java.util.Set;
 public class Channel implements Subject{
 
     private String name;
-    private Set<Subscriber> subscribers;
-    private Set<Video> videos;
+    private Set<Observer> subscribers;
+    private Set<Event> videos;
 
     public Channel(String name) {
         this.name =  name;
@@ -15,12 +15,12 @@ public class Channel implements Subject{
         videos = new HashSet<>();
         System.out.println("Channel " + name + " is created! Start uploading content asap!");
     }
-    public void subscribeUser(Subscriber subscriber) {
+    public void subscribeUser(Observer subscriber) {
         subscribers.add(subscriber);
         System.out.println("Thankyou " + subscriber.getName() + " for subscribing to " + name);
     }
 
-    public void unsubscribeUser(Subscriber subscriber) {
+    public void unsubscribeUser(Observer subscriber) {
         subscribers.remove(subscriber);
         System.out.println("Sorry to see you go " + subscriber.getName() + ", you can subscribe back to "+ name
                 +" whenever you want!");
@@ -28,14 +28,14 @@ public class Channel implements Subject{
 
     @Override
     public void notifyObservers(Event video) {
-        for (Subscriber subscriber : subscribers) {
+        for (Observer subscriber : subscribers) {
             System.out.println("Hey " + subscriber.getName() + ", rush to youtube to watch the video :" +
                     video.getTitle());
             subscriber.update(this);
         }
     }
 
-    public void uploadVideo(Video video) {
+    public void uploadVideo(Event video) {
         videos.add(video);
         System.out.println(video.getTitle() + " got successfully uploaded in channel");
         notifyObservers(video);
